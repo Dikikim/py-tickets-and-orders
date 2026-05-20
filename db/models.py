@@ -137,4 +137,3 @@ class Ticket(models.Model):
                 name="unique_ticket_row_seat_movie_session",
             )
         ]
-

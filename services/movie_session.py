@@ -63,4 +63,3 @@ def get_taken_seats(
             "seat",
         )
     )
-

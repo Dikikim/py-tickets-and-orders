@@ -31,6 +31,7 @@ def get_user(user_id: int = None, username: str = None) -> User:
     if username is not None:
         return User.objects.get(username=username)
 
+
 def update_user(
     user_id: int,
     username: str = None,

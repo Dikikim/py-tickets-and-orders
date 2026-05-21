@@ -25,9 +25,11 @@ def create_user(
     )
 
 
-def get_user(user_id: int) -> User:
-    return User.objects.get(id=user_id)
-
+def get_user(user_id: int = None, username: str = None) -> User:
+    if user_id is not None:
+        return User.objects.get(id=user_id)
+    if username is not None:
+        return User.objects.get(username=username)
 
 def update_user(
     user_id: int,

@@ -1,9 +1,7 @@
 from django.db import transaction
-from django.contrib.auth import get_user_model
 from django.db.models import QuerySet
 from db.models import Order, Ticket
-
-User = get_user_model()
+from services.user import get_user
 
 
 @transaction.atomic
@@ -12,12 +10,13 @@ def create_order(
     username: str,
     date: str = None,
 ) -> Order:
-    user = User.objects.get(username=username)
-    order = Order.objects.create(user=user)
+    user = get_user(username=username)
 
+    order_kwargs = {"user": user}
     if date:
-        order.created_at = date
-        order.save()
+        order_kwargs["created_at"] = date
+
+    order = Order.objects.create(**order_kwargs)
 
     for ticket_data in tickets:
         Ticket.objects.create(
